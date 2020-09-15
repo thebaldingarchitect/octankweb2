@@ -2,8 +2,8 @@ var express = require('express')
 var app = express()
 app.use(express.static(__dirname + '/public'));
 app.get('/', function(req, res) {
-	res.sendFile(path.join(__dirname+'/public/index.html'));
-	//res.render('index', {title: 'Example Node.js application for Octank Demo', body: '<img src=' } )
+	// render to views/index.ejs template file
+	res.render('index', {title: 'Example Node.js application for Octank Demo', body: '<img src=' } )
 })
 
 /** 
