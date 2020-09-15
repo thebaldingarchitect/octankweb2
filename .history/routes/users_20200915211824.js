@@ -28,7 +28,12 @@ app.get('/', function (req, res, next) {
 					} else {
 						instanceInfo = "instance ID " + data;
 						console.log(instanceInfo);
-						res.header('Cache-Control','max-age=0');
+						res.writeHead(200, {
+							'Content-Type': mimeType,
+							'Content-Length': contents.length,
+							'Accept-Ranges': 'bytes',
+							'Cache-Control': 'no-cache'
+						  });
 						res.render('user/list', {
 							title: 'User List',
 							data: rows,
@@ -45,6 +50,12 @@ app.get('/', function (req, res, next) {
 // SHOW ADD USER FORM
 app.get('/add', function (req, res, next) {
 	// render to views/user/add.ejs
+	res.writeHead(200, {
+		'Content-Type': mimeType,
+		'Content-Length': contents.length,
+		'Accept-Ranges': 'bytes',
+		'Cache-Control': 'no-cache'
+	  });
 	res.render('user/add', {
 		title: 'Add New User',
 		name: '',
@@ -60,7 +71,12 @@ app.post('/add', function (req, res, next) {
 	req.assert('email', 'A valid email is required').isEmail()  //Validate email
 
 	var errors = req.validationErrors()
-
+	res.writeHead(200, {
+		'Content-Type': mimeType,
+		'Content-Length': contents.length,
+		'Accept-Ranges': 'bytes',
+		'Cache-Control': 'no-cache'
+	  });
 	if (!errors) {   //No errors were found.  Passed Validation!
 
 		/********************************************
@@ -85,7 +101,6 @@ app.post('/add', function (req, res, next) {
 					req.flash('error', err)
 
 					// render to views/user/add.ejs
-					res.header('Cache-Control','max-age=0');
 					res.render('user/add', {
 						title: 'Add New User',
 						name: user.name,
@@ -96,7 +111,6 @@ app.post('/add', function (req, res, next) {
 					req.flash('success', 'Data added successfully!')
 
 					// render to views/user/add.ejs
-					res.header('Cache-Control','max-age=0');
 					res.render('user/add', {
 						title: 'Add New User',
 						name: '',
@@ -118,7 +132,6 @@ app.post('/add', function (req, res, next) {
 		 * Using req.body.name 
 		 * because req.param('name') is deprecated
 		 */
-		res.header('Cache-Control','max-age=0');
 		res.render('user/add', {
 			title: 'Add New User',
 			name: req.body.name,
@@ -141,7 +154,6 @@ app.get('/edit/(:id)', function (req, res, next) {
 			}
 			else { // if user found
 				// render to views/user/edit.ejs template file
-				res.header('Cache-Control','max-age=0');
 				res.render('user/edit', {
 					title: 'Edit User',
 					//data: rows[0],
@@ -187,7 +199,6 @@ app.put('/edit/(:id)', function (req, res, next) {
 					req.flash('error', err)
 
 					// render to views/user/add.ejs
-					res.header('Cache-Control','max-age=0');
 					res.render('user/edit', {
 						title: 'Edit User',
 						id: req.params.id,
@@ -199,7 +210,6 @@ app.put('/edit/(:id)', function (req, res, next) {
 					req.flash('success', 'Data updated successfully!')
 
 					// render to views/user/add.ejs
-					res.header('Cache-Control','max-age=0');
 					res.render('user/edit', {
 						title: 'Edit User',
 						id: req.params.id,
@@ -222,7 +232,6 @@ app.put('/edit/(:id)', function (req, res, next) {
 		 * Using req.body.name 
 		 * because req.param('name') is deprecated
 		 */
-		res.header('Cache-Control','max-age=0');
 		res.render('user/edit', {
 			title: 'Edit User',
 			id: req.params.id,

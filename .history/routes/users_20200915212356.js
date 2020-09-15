@@ -199,7 +199,6 @@ app.put('/edit/(:id)', function (req, res, next) {
 					req.flash('success', 'Data updated successfully!')
 
 					// render to views/user/add.ejs
-					res.header('Cache-Control','max-age=0');
 					res.render('user/edit', {
 						title: 'Edit User',
 						id: req.params.id,
@@ -222,7 +221,6 @@ app.put('/edit/(:id)', function (req, res, next) {
 		 * Using req.body.name 
 		 * because req.param('name') is deprecated
 		 */
-		res.header('Cache-Control','max-age=0');
 		res.render('user/edit', {
 			title: 'Edit User',
 			id: req.params.id,
