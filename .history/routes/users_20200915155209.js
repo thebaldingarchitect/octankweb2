@@ -19,14 +19,13 @@ app.get('/', function (req, res, next) {
 				// render to views/user/list.ejs template file
 				var AWS = require('aws-sdk');
 				var meta = new AWS.MetadataService();
-				var instanceInfo = 'Local Computer';
 
 				meta.request("/latest/meta-data/instance-id", function (err, data) {
 					console.log(data);
 					if (err) {
 						instanceInfo = 'Local Computer';
 					} else {
-						instanceInfo = "instance ID" + data;
+						instanceInfo = "instance ID " + data;
 						console.log(instanceInfo);
 						res.render('user/list', {
 							title: 'User List',
