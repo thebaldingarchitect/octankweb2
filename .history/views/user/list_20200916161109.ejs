@@ -36,13 +36,13 @@ including header content which is common for all pages
 			<td><%= user.age %></td>
 			<td><%= user.email %></td>
 			<td>
-				<!-- <div style="float:left">
+				<div style="float:left">
 					<a href='/users/edit/<%= user.id %>'>Edit</a> &nbsp;							
 					<form method="post" action="/users/delete/<%= user.id %>" style="float:right">
 						<input type="submit" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" />
 						<input type="hidden" name="_method" value="DELETE" />
 					</form>
-				</div> -->
+				</div>
 			</td>
 		</tr>
 	<% }) %>
